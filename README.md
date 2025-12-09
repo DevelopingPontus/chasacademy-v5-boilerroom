@@ -1,13 +1,14 @@
-## Om
+# Biblioteksapp
 
-Ett startprojekt för Boiler Room uppgiften för vecka 5.
+En biblioteksapp byggd med Spring Boot 4.0 och SQL som en del av en workshop.
 
-## Instruktioner
+## Programkrav
 
-Klona ner det här repo:t och ha som bas för att lösa uppgiften på egen hand. Gör atomära kommits för att skapa en bra logg för hur ni arbetar med uppgiften.
+- Java 24
+- PostgreSQL
 
-## Teknisk info
+## Bygga och köra applikationen
 
-Projektet är designat med Spring Boot 4.0 och fungerar med Java 17 eller nyare. Det är en medföljande gradle wrapper så för att bygga i en terminal/kommandotolk kör ```./gradlew bootRun```.
+- Kopiera `application.properties.example` till `application.properties` i `src/main/resources/` och uppdatera databasuppgifterna för att matcha din lokala PostgreSQL-instans.
 
-Kommandot ovan kommer bygga projektet och starta applikationen. Samma flöde går att åstakomma via IntelliJ och det kommer visas under workshoppen.
+- Kör applicationen med kommandot `./gradlew bootRun` i terminalen.
