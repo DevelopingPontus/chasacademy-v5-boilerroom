@@ -97,3 +97,52 @@ floor (random()*(1000001000 - 1000000000 + 1) + 1000000000),
 1
 from
 generate_series(1,100000) as gs;
+
+-- Generate loans for testing popular books
+-- This will create loans for approximately 50% of book copies
+-- Some books will be more popular (multiple loans) than others
+
+-- First, create a base set of loans (one loan per ~50% of copies)
+insert into loans(member_id, copy_id, start_date, end_date)
+select 
+    floor(random() * 10000 + 1)::int as member_id,
+    copy_id,
+    NOW() - (random() * INTERVAL '365 days') as start_date,
+    NOW() - (random() * INTERVAL '365 days') + INTERVAL '14 days' as end_date
+from book_copy 
+where random() < 0.5  -- About 50% of books get at least one loan
+limit 50000;
+
+-- Add additional loans to make some books more popular
+-- This creates "repeat borrowers" for popular books
+insert into loans(member_id, copy_id, start_date, end_date)
+select 
+    floor(random() * 10000 + 1)::int as member_id,
+    copy_id,
+    NOW() - (random() * INTERVAL '730 days') as start_date,
+    NOW() - (random() * INTERVAL '730 days') + INTERVAL '21 days' as end_date
+from book_copy 
+where random() < 0.15  -- 15% of books get a second loan (popular books)
+limit 15000;
+
+-- Create some "very popular" books with multiple loans
+insert into loans(member_id, copy_id, start_date, end_date)
+select 
+    floor(random() * 10000 + 1)::int as member_id,
+    copy_id,
+    NOW() - (random() * INTERVAL '1095 days') as start_date,
+    NOW() - (random() * INTERVAL '1095 days') + INTERVAL '28 days' as end_date
+from book_copy 
+where random() < 0.05  -- 5% of books get a third loan (very popular)
+limit 5000;
+
+-- Add some current loans (books currently borrowed)
+insert into loans(member_id, copy_id, start_date, end_date)
+select 
+    floor(random() * 10000 + 1)::int as member_id,
+    copy_id,
+    NOW() - (random() * INTERVAL '30 days') as start_date,
+    NOW() + (random() * INTERVAL '14 days') as end_date  -- Future end date = currently borrowed
+from book_copy 
+where random() < 0.1  -- 10% of books are currently borrowed
+limit 10000;

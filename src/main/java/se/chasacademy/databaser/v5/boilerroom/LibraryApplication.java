@@ -22,8 +22,50 @@ public class LibraryApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Välkommen till Bibliotek Z");
 
-//		bookRepository.findAll().forEach(System.out::println);
+		// bookRepository.findAll().forEach(System.out::println);
+		int borrowedBooks = bookRepository.getBooksBorrowed();
+		System.out.println("Antal utlånade böcker: " + borrowedBooks);
+		int notBorrowedBooks = bookRepository.getBooksNotBorrowedAllLibraries();
+		System.out.println("Antal ej utlånade böcker: " + notBorrowedBooks);
 
-//        bookRepository.getBooksNotBorrowed().forEach(System.out::println);
+		int activeMembers = bookRepository.getMembersWhoBorrowedBooks();
+		System.out.println("Medlemmar som lånat böcker: " + activeMembers);
+
+		var top10 = bookRepository.getTop10BooksAllLibraries();
+		System.out.println("Topp 10 populära böcker på alla bibliotek:");
+		top10.forEach(entry -> {
+			System.out.println("Boktitel: " + entry.title() + ", Antal lån: " + entry.loanCount());
+		});
+
+		{
+			var top10PerLibrary = bookRepository.getTop10BooksPerLibrary();
+			System.out
+					.println("Topp 10 populära böcker per bibliotek:");
+			top10PerLibrary.forEach(entry -> {
+				System.out.println("Bibliotek: " + entry.libraryName() +
+						", Boktitel: " + entry.data().title() +
+						", Antal lån: " + entry.data().loanCount());
+			});
+		}
+		{
+			var booksPerCategoryAllLibraries = bookRepository.getBooksPerCategoryAllLibraries();
+			System.out
+					.println("Antalet böcker per kategori för alla bibliotek:");
+			booksPerCategoryAllLibraries.forEach(entry -> {
+				System.out.println("Kategori: " + entry.categoryName() +
+						", Antal böcker: " + entry.bookCount());
+			});
+		}
+
+		{
+			var booksPerCategoryPerLibrary = bookRepository.getBooksPerCategoryPerLibrary();
+			System.out
+					.println("Antalet böcker per kategori för varje bibliotek:");
+			booksPerCategoryPerLibrary.forEach(entry -> {
+				System.out.println("Bibliotek: " + entry.libraryName() +
+						", Kategori: " + entry.data().categoryName() +
+						", Antal böcker: " + entry.data().bookCount());
+			});
+		}
 	}
 }
