@@ -19,14 +19,18 @@ public class BookRepository {
     }
 
     public List<Book> findAll() {
-        return jdbcClient
+        List<Book> books = jdbcClient
                 .sql("""
-                        select b.isbn, b.name as title, b.publication_date, c.category_id, c.name as category, a.name as author from books b
-                                join book_author ba on b.isbn = ba.isbn
-                                join authors a on ba.author_id = a.author_id
+                        select b.isbn, b.name as title, b.publication_date, c.category_id, c.name as category from books b
                                 join category c on b.category_id = c.category_id
                         """)
                 .query(new BookRowMapper())
                 .list();
+        for (Book book : books) {
+            // List<Author> authors =
+            // authorRepository.findAuthorsByBookIsbn(book.getIsbn());
+            // book.setAuthors(authors);
+        }
+        return books;
     }
 }
