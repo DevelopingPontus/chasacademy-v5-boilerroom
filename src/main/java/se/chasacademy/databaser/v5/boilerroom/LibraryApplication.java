@@ -22,6 +22,8 @@ public class LibraryApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Välkommen till Bibliotek Z");
 
-		bookRepository.findAll().forEach(System.out::println);
+//		bookRepository.findAll().forEach(System.out::println);
+
+//        bookRepository.getBooksNotBorrowed().forEach(System.out::println);
 	}
 }
