@@ -1,12 +1,14 @@
 package se.chasacademy.databaser.v5.boilerroom.Repositories;
 
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.stereotype.Repository;
 import se.chasacademy.databaser.v5.boilerroom.Models.Member;
 import se.chasacademy.databaser.v5.boilerroom.RowMappers.MemberRowMapper;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class MemberRepository {
     private JdbcClient jdbcClient;
     public MemberRepository(JdbcClient jdbcClient) {
