@@ -1,8 +1,10 @@
 package se.chasacademy.databaser.v5.boilerroom.Models;
 
+import se.chasacademy.databaser.v5.boilerroom.Models.Author;
+import se.chasacademy.databaser.v5.boilerroom.Models.Category;
+
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale.Category;
 
 public class Book {
     private String isbn;

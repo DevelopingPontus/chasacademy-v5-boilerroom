@@ -27,9 +27,8 @@ public class BookRepository {
                 .query(new BookRowMapper())
                 .list();
         for (Book book : books) {
-            // List<Author> authors =
-            // authorRepository.findAuthorsByBookIsbn(book.getIsbn());
-            // book.setAuthors(authors);
+            List<Author> authors = authorRepository.findByBook(book.getIsbn());
+            book.setAuthors(authors);
         }
         return books;
     }
