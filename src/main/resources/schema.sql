@@ -55,3 +55,30 @@ create table loans(
     start_date date not null, 
     end_date date not null
     );
+
+
+insert into library(name)
+select 'Hyllan Bibliotek';
+
+insert into authors(name)
+select 'Author ' || generate_series(1,1000);
+
+insert into category(name)
+select 'Category ' || generate_series(1,20);
+
+insert into books(isbn, name, publication_date, category_id)
+select
+gs,
+'Book ' || gs,
+NOW() - (random() * INTERVAL '7000 days'),
+floor(random()*20+1)
+from
+generate_series(1000000000,1000001000) as gs;
+
+insert into members(name, address, email)
+select
+'Member ' || gs,
+'Adress ' || gs,
+'Member' || gs ||'@hyllmail.com'
+from
+generate_series(1,10000) as gs;
