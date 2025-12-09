@@ -37,4 +37,11 @@ public class AuthorRepository {
                 .query(new AuthorRowMapper())
                 .single();
     }
+    // hämta authors per bok
+    public List<Author> findByBook(String isbn) {
+        return jdbcClient.sql("SELECT * FROM authors INNER JOIN book_author ON authors.author_id = book_author.author_id WHERE book_author.isbn = ?")
+                .params(isbn)
+                .query(new AuthorRowMapper())
+                .list();
+    }
 }
