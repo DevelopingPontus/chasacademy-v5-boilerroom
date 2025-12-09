@@ -1,17 +1,26 @@
 package se.chasacademy.databaser.v5.boilerroom;
 
+import java.util.Locale.Category;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import se.chasacademy.databaser.v5.boilerroom.Repositories.AuthorRepository;
 import se.chasacademy.databaser.v5.boilerroom.Repositories.BookRepository;
+import se.chasacademy.databaser.v5.boilerroom.Repositories.CategoryRepository;
 
 @SpringBootApplication
 public class LibraryApplication implements CommandLineRunner {
 	private BookRepository bookRepository;
+	private AuthorRepository authorRepository;
+	private CategoryRepository categoryRepository;
 
-	public LibraryApplication(BookRepository bookRepository) {
+	public LibraryApplication(BookRepository bookRepository, AuthorRepository authorRepository,
+			CategoryRepository categoryRepository) {
 		this.bookRepository = bookRepository;
+		this.authorRepository = authorRepository;
+		this.categoryRepository = categoryRepository;
 	}
 
 	public static void main(String[] args) {
@@ -22,7 +31,16 @@ public class LibraryApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Välkommen till Bibliotek Z");
 
+		System.out.println("Alla böcker:");
 		// bookRepository.findAll().forEach(System.out::println);
+
+		System.out.println("Kategorier:");
+		categoryRepository.findAll().forEach(category -> System.out.println(category.getName()));
+		System.out.println("---------------------");
+		System.out.println("Författare:");
+		// authorRepository.findAll().forEach(System.out::println);
+		System.out.println("---------------------");
+
 		int borrowedBooks = bookRepository.getBooksBorrowed();
 		System.out.println("Antal utlånade böcker: " + borrowedBooks);
 		int notBorrowedBooks = bookRepository.getBooksNotBorrowedAllLibraries();

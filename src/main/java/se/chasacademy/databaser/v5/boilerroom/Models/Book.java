@@ -63,9 +63,15 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [isbn=" + isbn + ", title=" + title + ", publishedDate=" + publishedDate + ", category="
-                + category.getName()
-                + ", authors=" + authors + "]";
+        if (authors.size() > 3) {
+            return "Book [isbn=" + isbn + ", title=" + title + ", publishedDate=" + publishedDate + ", category="
+                    + category.getName()
+                    + ", authors=" + authors.get(0) + ", " + authors.get(1) + ", " + authors.get(2) + " et al.]";
+        } else {
+            return "Book [isbn=" + isbn + ", title=" + title + ", publishedDate=" + publishedDate + ", category="
+                    + category.getName()
+                    + ", authors=" + authors + "]";
+        }
     }
 
 }

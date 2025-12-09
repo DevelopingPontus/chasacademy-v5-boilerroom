@@ -7,6 +7,8 @@ import se.chasacademy.databaser.v5.boilerroom.Models.Book;
 import se.chasacademy.databaser.v5.boilerroom.RowMappers.BookRowMapper;
 import se.chasacademy.databaser.v5.boilerroom.Models.BookPopularity;
 import se.chasacademy.databaser.v5.boilerroom.Models.LibraryStat;
+import se.chasacademy.databaser.v5.boilerroom.Models.CategoryStat;
+
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +16,6 @@ import org.springframework.stereotype.Repository;
 public class BookRepository {
     private JdbcClient jdbcClient;
     private AuthorRepository authorRepository;
-
-    public record CategoryStat(String categoryName, int bookCount) {
-    }
 
     public BookRepository(JdbcClient jdbcClient, AuthorRepository authorRepository) {
         this.jdbcClient = jdbcClient;
@@ -26,8 +25,18 @@ public class BookRepository {
     public List<Book> findAll() {
         List<Book> books = jdbcClient
                 .sql("""
-                        select b.isbn, b.name as title, b.publication_date, c.category_id, c.name as category from books b
-                                join category c on b.category_id = c.category_id
+                        select
+                                b.isbn,
+                                b.name as title,
+                                b.publication_date,
+                                c.category_id,
+                                c.name as category
+                            from
+                                books b
+                            join
+                                category c
+                            on
+                                b.category_id = c.category_id
                         """)
                 .query(new BookRowMapper())
                 .list();
