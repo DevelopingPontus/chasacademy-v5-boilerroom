@@ -82,3 +82,11 @@ select
 'Member' || gs ||'@hyllmail.com'
 from
 generate_series(1,10000) as gs;
+
+insert into book_author(author_id, isbn)
+select
+floor (random()*1000+1),
+floor (random()*(1000001000 - 1000000000 + 1) + 1000000000)
+from
+generate_series(1,100000)
+on conflict do nothing;
