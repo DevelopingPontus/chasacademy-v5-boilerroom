@@ -1,3 +1,13 @@
+drop table if exists loans;
+drop table if exists members;
+drop table if exists book_copy;
+drop table if exists book_author;
+drop table if exists books;
+drop table if exists category;
+drop table if exists authors;
+drop table if exists library;
+
+
 create table library (
     library_id int primary key generated always as identity,
     name varchar(32) not null
@@ -35,7 +45,7 @@ create table book_copy(
 create table members(
     member_id int primary key generated always as identity, 
     name varchar(32) not null, 
-    adress varchar(32) not null, 
+    address varchar(32) not null, 
     email varchar(32) not null
     );
 
