@@ -40,7 +40,7 @@ public class MemberRepository {
      * @throws IllegalArgumentException if any of the parameters are blank or null
      * @return true if the member was created, false otherwise
      */
-    public boolean create(@NonNull String name, @NonNull String address, @NonNull String email) {
+    public boolean create(String name, String address, String email) {
         if (name == null || address == null || email == null) {
             throw new IllegalArgumentException("Name, email and address cannot be null");
         }
