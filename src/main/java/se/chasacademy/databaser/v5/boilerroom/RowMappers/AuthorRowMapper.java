@@ -1,4 +1,4 @@
-package se.chasacademy.databaser.v5.boilerroom.Rowmappers;
+package se.chasacademy.databaser.v5.boilerroom.RowMappers;
 
 import org.springframework.jdbc.core.RowMapper;
 import se.chasacademy.databaser.v5.boilerroom.Models.Author;

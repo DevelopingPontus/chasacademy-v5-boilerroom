@@ -3,7 +3,7 @@ package se.chasacademy.databaser.v5.boilerroom.Repositories;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import se.chasacademy.databaser.v5.boilerroom.Models.Author;
-import se.chasacademy.databaser.v5.boilerroom.Rowmappers.AuthorRowMapper;
+import se.chasacademy.databaser.v5.boilerroom.RowMappers.AuthorRowMapper;
 
 import java.util.List;
 
