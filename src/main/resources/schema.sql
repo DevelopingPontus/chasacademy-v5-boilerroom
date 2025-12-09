@@ -90,3 +90,10 @@ floor (random()*(1000001000 - 1000000000 + 1) + 1000000000)
 from
 generate_series(1,100000)
 on conflict do nothing;
+
+insert into book_copy(isbn, library_id)
+select
+floor (random()*(1000001000 - 1000000000 + 1) + 1000000000),
+1
+from
+generate_series(1,100000) as gs;
